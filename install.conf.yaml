@@ -4,5 +4,8 @@
     ~/.profile: profile
     ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
+    ~/workspaces/.env/env: env/env
+    ~/workspaces/.env/smash: env/smash
+    ~/workspaces/.env/pade: env/pade
 
 
