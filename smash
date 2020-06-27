@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# A bash file to init the personal smash workspace
+
+
+# Util variables and functions
+activate() {
+	cd $workspaces/smash-py
+	source $env
+}
+
+run() {
+	pade start-runtime $workspaces/smash-py/main.py
+}
+
+runtest() {
+	if [[ $1 == "" ]]; then
+		echo "No such argument provided. Please, provide a test system file to run smash."
+	else
+		pade start-runtime $1
+	fi
+}
+
+
+read -r -d '' help << EOT
+NAME
+       smash - runs some actions for smash-py dev env
+
+SYNOPSIS
+       smash [OPTION]
+
+DESCRIPTION
+       Run some actions for the smash-py development environment.
+
+OPTIONS
+       -a, --activate
+              activate the smash python env
+
+       -r, --run
+              run the main file of smash
+
+       -t, --test
+              run another test system with smash
+
+       -e, --exit
+              exit from the dev env
+
+       -h, --help
+              show the help
+EOT
+
+
+# Activities of the script
+case $1 in
+	'')
+		run
+		;;
+
+	'-a' | '--activate')
+		activate
+		;;
+
+	'-r' | '--run')
+		run
+		;;
+
+	'-t' | '--test')
+		runtest $2
+		;;
+
+	'-e' | '--exit')
+		cd $HOME
+		deactivate
+		;;
+
+	'-h' | '--help')
+		echo "$help"
+		;;
+
+	*)
+		echo 'Unknown option. Use smash -h to see the help.'
+		;;
+esac

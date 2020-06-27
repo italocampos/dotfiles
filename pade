@@ -1,0 +1,68 @@
+#!/bin/bash
+
+# A bash file to init the personal pade workspace
+
+
+# Util variables and functions
+activate() {
+	cd $workspaces/pade
+	source $env
+}
+
+run() {
+	pade start-runtime $1
+}
+
+read -r -d '' help << EOT
+NAME
+       padex - runs some actions for PADE dev env
+
+SYNOPSIS
+       padex [OPTION]
+       padex [FILE TO RUN]
+
+DESCRIPTION
+       Run some actions for the PADE development environment.
+
+OPTIONS
+       -a, --activate
+              activate the PADE python env
+
+       -r, --run
+              run the provided file with PADE
+
+       -e, --exit
+              exit from the dev env
+
+       -h, --help
+              show the help
+EOT
+
+
+# Activities of the script
+case $1 in
+	'-a' | '--activate')
+		activate
+		;;
+
+	'-r' | '--run')
+		run $2
+		;;
+
+	'-e' | '--exit')
+		cd $HOME
+		deactivate
+		;;
+
+	'-h' | '--help')
+		echo "$help"
+		;;
+
+	*)
+		if [[ -e $1 ]]; then
+			run $1
+		else
+			echo 'File not found or unknown option. Use padex -h to see the help.'
+		fi
+		;;
+esac
