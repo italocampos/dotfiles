@@ -1,0 +1,25 @@
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export EDITOR=/usr/bin/nano
+
+# Defining global environment variables
+export workspaces="$HOME/workspaces"
+export active_env="$workspaces/venvs/default"
+
+# Defining Python path
+export PYTHONPATH="$PYTHONPATH:$workspaces/smash-py:."
+
+# Activating the personal python-env
+if [[ -e $HOME/.dotfiles ]]; then
+	alias venv=". $HOME/.dotfiles/venv"
+	alias smash=". $HOME/.dotfiles/smash"
+	alias padex=". $HOME/.dotfiles/pade"
+fi
+
+# JAVA classpath variables
+#export libs="$workspaces/libs"
+#jade="$libs/jade.jar"
+#gson="$libs/gson-2.8.5.jar"
+#commons="$libs/commons-math-2.2.jar"
+#json="$libs/json"
+#powerflow="$libs/ladder-iterative.jar"
+#export CLASSPATH=".:$libs:$jade:$gson:$commons:$json:$powerflow"

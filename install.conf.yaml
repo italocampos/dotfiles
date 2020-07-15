@@ -7,5 +7,5 @@
     ~/workspaces/.env/env: env/env
     ~/workspaces/.env/smash: env/smash
     ~/workspaces/.env/pade: env/pade
-
-
+    ~/.bashrc: bashrc
+    ~/.zsh: zshrc

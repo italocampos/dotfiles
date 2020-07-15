@@ -5,7 +5,7 @@
 
 # Util variables and functions
 activate() {
-	source $workspaces/env/$1/bin/activate
+	source $workspaces/venvs/$1/bin/activate
 }
 
 read -r -d '' help << EOT
@@ -55,11 +55,10 @@ case $1 in
 	'-s' | '--set-active')
 		if [[ $2 != '' ]]; then
 			export active_env=$2
+			activate $active_env
 		else
 			echo 'No env name provided. Type env -h to see the help.'
 		fi
-		;;
-		activate $active_env
 		;;
 
 	'-d' | '--deactivate')
