@@ -5,17 +5,17 @@
 
 # Util variables and functions
 activate() {
-	source $workspaces/venvs/$1/bin/activate
+	source $1/bin/activate
 }
 
 read -r -d '' help << EOT
 NAME
-       env - runs some activation actions for Python dev envs
+       venv - runs some actions for Python dev envs
 
 SYNOPSIS
-       env [ENV NAME]
-       env -a [ENV NAME]
-       env -d
+       venv [ENV NAME]
+       venv -a [ENV NAME]
+       venv -d
 
 DESCRIPTION
        Activate and deactivate a specific Python dev environment.
@@ -55,6 +55,7 @@ case $1 in
 	'-s' | '--set-active')
 		if [[ $2 != '' ]]; then
 			export active_env=$2
+			echo "$2 set as active env."
 			activate $active_env
 		else
 			echo 'No env name provided. Type env -h to see the help.'
@@ -62,13 +63,14 @@ case $1 in
 		;;
 
 	'-d' | '--deactivate')
-		cd $HOME
+		#cd $HOME
 		deactivate
 		;;
 
 	'-r' | '--reset')
 		cd $HOME
 		source $HOME/.profile
+		echo "venv set the environment configs to default."
 		;;
 
 	'-h' | '--help')

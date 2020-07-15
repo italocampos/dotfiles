@@ -9,10 +9,11 @@ export active_env="$workspaces/venvs/default"
 export PYTHONPATH="$PYTHONPATH:$workspaces/smash-py:."
 
 # Activating the personal python-env
+dotfiles="$HOME/.dotfiles/dotfiles"
 if [[ -e $HOME/.dotfiles ]]; then
-	alias venv=". $HOME/.dotfiles/venv"
-	alias smash=". $HOME/.dotfiles/smash"
-	alias padex=". $HOME/.dotfiles/pade"
+	alias venv=". $dotfiles/venv"
+	alias smash=". $dotfiles/smash"
+	alias padex=". $dotfiles/padex"
 fi
 
 # JAVA classpath variables
