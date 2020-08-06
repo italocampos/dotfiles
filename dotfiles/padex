@@ -4,11 +4,6 @@
 
 
 # Util variables and functions
-activate() {
-	cd $workspaces/pade
-	source $env
-}
-
 run() {
 	pade start-runtime $1
 }
@@ -18,40 +13,25 @@ NAME
        padex - runs some actions for PADE dev env
 
 SYNOPSIS
-       padex [OPTION]
        padex [FILE TO RUN]
+       padex -r [FILE TO RUN]
 
 DESCRIPTION
        Run some actions for the PADE development environment.
 
 OPTIONS
-       -a, --activate
-              activate the PADE python env
-
        -r, --run
-              run the provided file with PADE
-
-       -e, --exit
-              exit from the dev env
+              Run the provided file with PADE.
 
        -h, --help
-              show the help
+              Show the help.
 EOT
 
 
 # Activities of the script
 case $1 in
-	'-a' | '--activate')
-		activate
-		;;
-
 	'-r' | '--run')
 		run $2
-		;;
-
-	'-e' | '--exit')
-		cd $HOME
-		deactivate
 		;;
 
 	'-h' | '--help')

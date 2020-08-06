@@ -2,6 +2,9 @@
 # ~/.bashrc
 #
 
+# Personal imports before bashrc
+source $HOME/.profile
+
 [[ $- != *i* ]] && return
 
 colors() {

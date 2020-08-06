@@ -4,8 +4,10 @@
 
 
 # Util variables and functions
+export active_env="default"
+
 activate() {
-	source $1/bin/activate
+	source $workspaces/venv/$1/bin/activate
 }
 
 read -r -d '' help << EOT
@@ -13,28 +15,30 @@ NAME
        venv - runs some actions for Python dev envs
 
 SYNOPSIS
-       venv [ENV NAME]
+       venv
        venv -a [ENV NAME]
        venv -d
+       venv -s [ENV NAME]
+       venv -r
 
 DESCRIPTION
-       Activate and deactivate a specific Python dev environment.
+       Activate, deactivate and switch between the Python dev environment set at the $HOME/workspaces/venv path
 
 OPTIONS
        -a, --activate
-              activate the PADE python env
+              Activate the provided Python dev env. This activates the current active env case no parameter is provided.
 
        -d, --deactivate
-              dactivate the PADE python env
+              Dactivate the current Python dev env.
 
        -s, --set-active
-              set another env as active
+              Set a specific dev env as active env.
 
        -r, --reset
-              reset env configuration in the system
+              Reset the dev env configuration in the system to default.
 
        -h, --help
-              show the help
+              Show the help.
 EOT
 
 
@@ -54,11 +58,15 @@ case $1 in
 	
 	'-s' | '--set-active')
 		if [[ $2 != '' ]]; then
-			export active_env=$2
-			echo "$2 set as active env."
-			activate $active_env
+			if [[ -e $workspaces/venv/$2 ]]; then
+				export active_env=$2
+				activate $active_env
+				echo "$2 set as the active dev env."
+			else
+				echo "The env named $2 doesn't exist. The active dev env was not changed."
+			fi
 		else
-			echo 'No env name provided. Type env -h to see the help.'
+			echo "No env name provided. Create a dev env at the $workspaces/venv path and try again. Type venv -h to see the help."
 		fi
 		;;
 
@@ -68,8 +76,9 @@ case $1 in
 		;;
 
 	'-r' | '--reset')
+		venv -d
 		cd $HOME
-		source $HOME/.profile
+		export active_env="default"
 		echo "venv set the environment configs to default."
 		;;
 
@@ -78,6 +87,6 @@ case $1 in
 		;;
 
 	*)
-		echo 'Unknown option. Use env -h to see the help.'
+		echo 'Unknown option. Use venv -h to see the help.'
 		;;
 esac

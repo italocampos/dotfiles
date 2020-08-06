@@ -3,7 +3,6 @@ export EDITOR=/usr/bin/nano
 
 # Defining global environment variables
 export workspaces="$HOME/workspaces"
-export active_env="$workspaces/venvs/default"
 
 # Defining Python path
 export PYTHONPATH="$PYTHONPATH:$workspaces/smash-py:."

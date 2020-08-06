@@ -4,13 +4,9 @@
 
 
 # Util variables and functions
-activate() {
-	cd $workspaces/smash-py
-	source $env
-}
-
 run() {
-	pade start-runtime $workspaces/smash-py/main.py
+	pade start-runtime $1
+	#pade start-runtime $workspaces/smash-py/main.py
 }
 
 runtest() {
@@ -27,23 +23,16 @@ NAME
        smash - runs some actions for smash-py dev env
 
 SYNOPSIS
-       smash [OPTION]
+       smash
+       smash -r
+       smash -r [FILE TO RUN]
 
 DESCRIPTION
-       Run some actions for the smash-py development environment.
+       Runs some actions for the smash-py development environment.
 
 OPTIONS
-       -a, --activate
-              activate the smash python env
-
        -r, --run
-              run the main file of smash
-
-       -t, --test
-              run another test system with smash
-
-       -e, --exit
-              exit from the dev env
+              Run the provided file with smash. This runs the main file of smash if no parameter is provided.
 
        -h, --help
               show the help
@@ -53,24 +42,15 @@ EOT
 # Activities of the script
 case $1 in
 	'')
-		run
-		;;
-
-	'-a' | '--activate')
-		activate
+		run $workspaces/smash-py/main.py
 		;;
 
 	'-r' | '--run')
-		run
-		;;
-
-	'-t' | '--test')
-		runtest $2
-		;;
-
-	'-e' | '--exit')
-		cd $HOME
-		deactivate
+		if [[ $2 == "" ]]; then
+			run $workspaces/smash-py/main.py
+		else
+			run $2
+		fi
 		;;
 
 	'-h' | '--help')

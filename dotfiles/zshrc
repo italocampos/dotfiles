@@ -24,6 +24,10 @@ SAVEHIST=500
 #export VISUAL=/usr/bin/nano
 WORDCHARS=${WORDCHARS//\/[&.;]}                                 # Don't consider certain characters part of the word
 
+# Personal imports before zsh
+#echo "Can I put something here?"
+source $HOME/.profile
+
 
 ## Keybindings section
 bindkey -e
