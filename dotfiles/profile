@@ -15,6 +15,14 @@ if [[ -e $HOME/.dotfiles ]]; then
 	alias padex=". $dotfiles/padex"
 fi
 
+# Defining Git aliases
+alias gis="git status"
+alias gip="git push"
+alias gid="git diff"
+alias gil="git log --oneline --graph"
+alias gic="git checkout"
+alias gib="git branch"
+
 # JAVA classpath variables
 #export libs="$workspaces/libs"
 #jade="$libs/jade.jar"
