@@ -16,12 +16,14 @@ if [[ -e $HOME/.dotfiles ]]; then
 fi
 
 # Defining Git aliases
-alias gis="git status"
-alias gip="git push"
+alias gia="git add"
+alias gib="git branch"
+alias gic="git commit"
 alias gid="git diff"
 alias gil="git log --oneline --graph"
-alias gic="git checkout"
-alias gib="git branch"
+alias gip="git push"
+alias gis="git status"
+alias gick="git checkout"
 
 # JAVA classpath variables
 #export libs="$workspaces/libs"
