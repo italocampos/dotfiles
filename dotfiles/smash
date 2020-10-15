@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # A bash file to init the personal smash workspace
 
@@ -35,7 +35,7 @@ OPTIONS
               Run the provided file with smash. This runs the main file of smash if no parameter is provided.
 
        -h, --help
-              show the help
+              Show the help
 EOT
 
 
