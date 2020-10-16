@@ -21,7 +21,7 @@ uninst() {
 }
 
 list() {
-	PACKAGES=$(ls -1 $workspaces/python-libs/)
+	PACKAGES=$(ls -1I__pycache__ $workspaces/python-libs/)
 	echo $PACKAGES
 }
 
