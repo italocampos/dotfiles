@@ -5,7 +5,7 @@ export EDITOR=/usr/bin/nano
 export workspaces="$HOME/workspaces"
 
 # Defining Python path
-export PYTHONPATH="$PYTHONPATH:$workspaces/smash-py:."
+export PYTHONPATH="$PYTHONPATH:$workspaces/python-libs:."
 
 # Activating the personal python-env
 dotfiles="$HOME/.dotfiles/dotfiles"
@@ -13,6 +13,7 @@ if [[ -e $HOME/.dotfiles ]]; then
 	alias venv=". $dotfiles/venv"
 	alias smash=". $dotfiles/smash"
 	alias padex=". $dotfiles/padex"
+	alias pypack=". $dotfiles/pypack"
 fi
 
 # Defining Git aliases
@@ -25,8 +26,11 @@ alias gip="git push"
 alias gis="git status"
 alias gick="git checkout"
 
+# Defining other alias
+alias ls="ls --color"
+
 # JAVA classpath variables
-#export libs="$workspaces/libs"
+#export libs="$workspaces/java-libs"
 #jade="$libs/jade.jar"
 #gson="$libs/gson-2.8.5.jar"
 #commons="$libs/commons-math-2.2.jar"

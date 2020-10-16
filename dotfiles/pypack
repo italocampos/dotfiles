@@ -1,0 +1,90 @@
+#!/bin/sh
+
+# A bash file to install personal python packages in the local library
+
+
+# Util variables and functions
+inst() {
+	#echo "ln -s "`pwd`"/$1" "$workspaces/python-libs/$1"
+	ln -s `pwd`"/$1" $workspaces/python-libs/"$1"
+	echo "Package installed successfully."
+}
+
+uninst() {
+	#echo "rm "$workspaces/python-libs/$1
+	if [[ -e $workspaces/python-libs/$1 ]]; then
+		rm $workspaces/python-libs/$1
+		echo "The package $1 was uninstalled successfully."
+	else
+		echo "The package $1 doen't is installed."
+	fi
+}
+
+list() {
+	PACKAGES=$(ls -1 $workspaces/python-libs/)
+	echo $PACKAGES
+}
+
+
+read -r -d '' help << EOT
+NAME
+       pypack - install and uninstall python packages in the user lib
+
+SYNOPSIS
+       pypack -i [PACKAGE TO INSTALL]
+       pypack -u [PACKAGE TO UNINSTALL]
+       pypack -l
+
+DESCRIPTION
+       Manages the installation and uninstallation of python packages in the user lib.
+
+OPTIONS
+       -i, --install
+              Install a python package.
+
+       -u, --uninstall
+              Uninstall a python package.
+
+       -l, --list
+              List all the packages installed in the user library.
+
+       -h, --help
+              Show the help.
+EOT
+
+
+# Activities of the script
+case $1 in
+
+	'-i' | '--install')
+		if [[ $2 == "" ]]; then
+			echo "You need to provide a package name to install something."
+		else
+			if [[ $2 == *"/"* ]]; then
+				echo "You need to provide a package name instead of a file path."
+			else
+				inst $2
+			fi
+		fi
+		;;
+
+	'-u' | '--uninstall')
+		if [[ $2 == "" ]]; then
+			echo "You need to provide a package name to uninstall something."
+		else
+			uninst $2
+		fi
+		;;
+
+	'-l' | '--list')
+		list
+		;;
+
+	'-h' | '--help')
+		echo "$help"
+		;;
+
+	*)
+		echo 'Unknown option. Use pypack -h to see the help.'
+		;;
+esac
