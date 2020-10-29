@@ -16,7 +16,7 @@ uninst() {
 		rm $workspaces/python-libs/$1
 		echo "The package $1 was uninstalled successfully."
 	else
-		echo "The package $1 doen't is installed."
+		echo "The package $1 is not installed."
 	fi
 }
 
