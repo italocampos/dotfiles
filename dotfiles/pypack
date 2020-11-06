@@ -6,7 +6,7 @@
 # Util variables and functions
 inst() {
 	#echo "ln -s "`pwd`"/$1" "$workspaces/python-libs/$1"
-	ln -s `pwd`"/$1" $workspaces/python-libs/"$1"
+	ln -sf `pwd`"/$1" $workspaces/python-libs/"$1"
 	echo "Package installed successfully."
 }
 
