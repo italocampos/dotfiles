@@ -2,18 +2,19 @@
 
 # A bash file to install personal python packages in the local library
 
+# Sets the default path
+DEFAULT_PYPACK_PATH="$workspaces/libs/python"
+
 
 # Util variables and functions
 inst() {
-	#echo "ln -s "`pwd`"/$1" "$workspaces/python-libs/$1"
-	ln -sf `pwd`"/$1" $workspaces/python-libs/"$1"
+	ln -sf `pwd`"/$1" $DEFAULT_PYPACK_PATH/"$1"
 	echo "Package installed successfully."
 }
 
 uninst() {
-	#echo "rm "$workspaces/python-libs/$1
-	if [[ -e $workspaces/python-libs/$1 ]]; then
-		rm $workspaces/python-libs/$1
+	if [[ -e $DEFAULT_PYPACK_PATH/$1 ]]; then
+		rm $DEFAULT_PYPACK_PATH/$1
 		echo "The package $1 was uninstalled successfully."
 	else
 		echo "The package $1 is not installed."
@@ -21,7 +22,7 @@ uninst() {
 }
 
 list() {
-	PACKAGES=$(ls -1I__pycache__ $workspaces/python-libs/)
+	PACKAGES=$(ls -1I__pycache__ $DEFAULT_PYPACK_PATH)
 	echo $PACKAGES
 }
 
