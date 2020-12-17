@@ -1,8 +1,23 @@
 - clean: ['~']
 
 - link:
-    ~/.profile: dotfiles/profile
-    ~/.bash_profile: dotfiles/bash_profile
-    ~/.gitconfig: dotfiles/gitconfig
-    ~/.bashrc: dotfiles/bashrc
-    ~/.zsh: dotfiles/zshrc
+    ~/.profile:
+        path: dotfiles/profile
+        relink: true
+        force: true
+    ~/.bash_profile:
+        path: dotfiles/bash_profile
+        relink: true
+        force: true
+    ~/.gitconfig:
+        path: dotfiles/gitconfig
+        relink: true
+        force: true
+    ~/.bashrc:
+        path: dotfiles/bashrc
+        relink: true
+        force: true
+    ~/.zshrc:
+        path: dotfiles/zshrc
+        relink: true
+        force: true
