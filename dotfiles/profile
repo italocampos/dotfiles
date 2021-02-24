@@ -26,7 +26,10 @@ alias gid="git diff"
 alias gil="git log --oneline --graph"
 alias gip="git push"
 alias gis="git status"
-alias gick="git checkout"
+alias gik="git checkout"
+alias giw="git switch"
+alias giu="git pull --rebase"
+alias gih="git stash"
 
 # Defining other alias
 alias ls="ls --color"
