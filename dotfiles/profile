@@ -32,9 +32,17 @@ alias giu="git pull --rebase"
 alias gih="git stash"
 alias gig="git tag"
 alias gih="git stash"
+alias gir="git restore --staged"
 
 # Defining other alias
 alias ls="ls --color"
+
+# Defining Loggi aliases
+alias loggienv="source /opt/loggi/venvs/ops/bin/activate"
+
+# Loggi utility path
+export LOGGI_OPS=/opt/loggi/ops
+export PATH=${LOGGI_OPS}/ansible/bin:$PATH
 
 # JAVA classpath variables
 #export javalibs="$workspaces/libs/java"
