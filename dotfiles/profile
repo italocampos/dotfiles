@@ -32,6 +32,7 @@ alias giu="git pull --rebase"
 alias gih="git stash"
 alias gig="git tag"
 alias gih="git stash"
+alias gir="git restore --staged"
 
 # Defining other alias
 alias ls="ls --color"
