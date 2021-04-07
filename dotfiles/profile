@@ -15,6 +15,7 @@ if [[ -e $dotfiles ]]; then
 	alias padex=". $dotfiles/padex"
 	alias pypack=". $dotfiles/pypack"
 	alias integration=". $dotfiles/integration"
+	alias tools=". $dotfiles/tools"
 else
 	echo "Can't install customized scripts. Please, use git clone git@github.com:italocampos/dotfiles.git in '$workspaces' path, and try again."
 fi
