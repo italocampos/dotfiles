@@ -2,4 +2,4 @@
 	email = italo.ramon.campos@gmail.com
 	name = Italo Campos
 [core]
-	editor = gedit
+	editor = nano
