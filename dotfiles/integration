@@ -1,0 +1,134 @@
+#!/bin/sh
+#
+# A bash file that compiles some of the most common commands on Integration app
+#
+
+# Defining the jobs of the script
+
+INTEGRATION_HOME="$workspaces/jvm"
+
+assemble() {
+    cd $INTEGRATION_HOME
+    ./gradlew integration:clean && ./gradlew integration:assemble
+
+    if [ $1 == '--hard' ]; then
+        build -b
+    elif [ $1 == '--soft' ]; then
+        build -B
+    fi
+}
+
+build() {
+    cd $INTEGRATION_HOME
+
+    if [ $1 == '-b' ]; then
+        ./gradlew integration:build
+    elif [ $1 == '-B' ]; then
+        ./gradlew integration:build -x test
+    fi
+}
+
+lint() {
+    cd $INTEGRATION_HOME
+    ./gradlew integration:ktlintFormat && ./gradlew integration:ktlintCheck
+}
+
+run() {
+    cd $INTEGRATION_HOME
+    ./gradlew integration:run
+}
+
+testapp() {
+    cd $INTEGRATION_HOME
+    ./gradlew integration:test --tests $1
+}
+
+read -r -d '' help << EOT
+INTEGRATION TOOL
+
+Description: Compiles some of the most common development commands for Integration app.
+
+Usage: integration <args>
+
+Options:
+    -a, --assemble
+        Cleans and assembles the Integration app
+
+    -b, --build
+        Builds Integration running the tests
+
+    -B, --build-skipping-tests
+        Builds Integration skipping the tests
+
+    -l, --lint
+        Lints and check the formatting of the code on Integration
+    
+    -r, --rebuild, -r --soft, ---rebuild --soft
+        Cleans, assembles and builds Integration skipping the tests
+    
+    -r --hard
+        Cleans, assembles and builds Integration checking all the tests
+    
+    -t <TestClass>, --test <TestClass>
+        Runs the test class <TestClass> of Integration
+    
+    -x, --execute, --run
+        Runs Integration app locally
+    
+    -h, --help
+        Shows this help text.
+
+Examples of usage:
+    integration -x
+    integration -t "com.domain.app.TestClass"
+    integration -r --soft
+    integration -B
+EOT
+
+
+# Selects the funcion to execute
+case $1 in
+    '-a' | '--assemble')
+        assemble
+        ;;
+
+    '-b' | '--build')
+        build -b
+        ;;
+    
+    '-B' | '--build-skipping-tests')
+        build -B
+        ;;
+
+    '-l' | '--lint')
+        lint
+        ;;
+
+    '-r' | '--rebuild')
+        if [ $2 == '' -o $2 == '--soft' ]; then
+            assemble --soft
+        elif [ $2 == '--hard' ]; then
+            assemble --hard
+        fi
+        ;;
+
+    '-t' | '--test')
+        if [ $2 == '' ]; then
+            echo "No test class provided. Provide the name of the class that you want to test."
+        else
+            testapp $2
+        fi
+        ;;
+
+    '-x' | '--execute' | '--run')
+        run
+        ;;
+
+    '' | '-h' | '--help')
+        echo "$help"
+        ;;
+
+    *)
+        echo 'Unknown option. Use integration -h to see the help.'
+        ;;
+esac
